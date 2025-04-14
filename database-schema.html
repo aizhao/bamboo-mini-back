@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bamboo Mini Database Schema</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f5f5f5;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #333;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .schema-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 30px;
+      }
+      .schema-table th {
+        background-color: #f0f0f0;
+        padding: 10px;
+        text-align: left;
+      }
+      .schema-table td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+      }
+      .schema-table tr:hover {
+        background-color: #f9f9f9;
+      }
+      .table-name {
+        font-weight: bold;
+        color: #2c3e50;
+        margin-top: 20px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Bamboo Mini Database Schema</h1>
+
+      <div class="table-name">users</div>
+      <table class="schema-table">
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Null</th>
+          <th>Key</th>
+          <th>Default</th>
+          <th>Extra</th>
+        </tr>
+        <tr>
+          <td>id</td>
+          <td>int</td>
+          <td>NO</td>
+          <td>PRI</td>
+          <td>NULL</td>
+          <td>auto_increment</td>
+        </tr>
+        <tr>
+          <td>openid</td>
+          <td>varchar(50)</td>
+          <td>NO</td>
+          <td>UNI</td>
+          <td>NULL</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>nickname</td>
+          <td>varchar(50)</td>
+          <td>YES</td>
+          <td></td>
+          <td>NULL</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>avatar</td>
+          <td>varchar(255)</td>
+          <td>YES</td>
+          <td></td>
+          <td>NULL</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>phone</td>
+          <td>varchar(20)</td>
+          <td>YES</td>
+          <td></td>
+          <td>NULL</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>created_at</td>
+          <td>datetime</td>
+          <td>NO</td>
+          <td></td>
+          <td>CURRENT_TIMESTAMP</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>updated_at</td>
+          <td>datetime</td>
+          <td>NO</td>
+          <td></td>
+          <td>CURRENT_TIMESTAMP</td>
+          <td>on update CURRENT_TIMESTAMP</td>
+        </tr>
+      </table>
+
+      <div class="table-name">products</div>
+      <table class="schema-table">
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Null</th>
+          <th>Key</th>
+          <th>Default</th>
+          <th>Extra</th>
+        </tr>
+        <tr>
+          <td>id</td>
+          <td>int</td>
+          <td>NO</td>
+          <td>PRI</td>
+          <td>NULL</td>
+          <td>auto_increment</td>
+        </tr>
+        <tr>
+          <td>name</td>
+          <td>varchar(100)</td>
+          <td>NO</td>
+          <td></td>
+          <td>NULL</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>description</td>
+          <td>text</td>
+          <td>YES</td>
+          <td></td>
+          <td>NULL</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>price</td>
+          <td>decimal(10,2)</td>
+          <td>NO</td>
+          <td></td>
+          <td>NULL</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>stock</td>
+          <td>int</td>
+          <td>NO</td>
+          <td></td>
+          <td>0</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>image</td>
+          <td>varchar(255)</td>
+          <td>YES</td>
+          <td></td>
+          <td>NULL</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>category_id</td>
+          <td>int</td>
+          <td>NO</td>
+          <td>MUL</td>
+          <td>NULL</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>created_at</td>
+          <td>datetime</td>
+          <td>NO</td>
+          <td></td>
+          <td>CURRENT_TIMESTAMP</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>updated_at</td>
+          <td>datetime</td>
+          <td>NO</td>
+          <td></td>
+          <td>CURRENT_TIMESTAMP</td>
+          <td>on update CURRENT_TIMESTAMP</td>
+        </tr>
+      </table>
+
+      <div class="table-name">orders</div>
+      <table class="schema-table">
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Null</th>
+          <th>Key</th>
+          <th>Default</th>
+          <th>Extra</th>
+        </tr>
+        <tr>
+          <td>id</td>
+          <td>int</td>
+          <td>NO</td>
+          <td>PRI</td>
+          <td>NULL</td>
+          <td>auto_increment</td>
+        </tr>
+        <tr>
+          <td>user_id</td>
+          <td>int</td>
+          <td>NO</td>
+          <td>MUL</td>
+          <td>NULL</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>total_amount</td>
+          <td>decimal(10,2)</td>
+          <td>NO</td>
+          <td></td>
+          <td>0.00</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>status</td>
+          <td>varchar(20)</td>
+          <td>NO</td>
+          <td></td>
+          <td>'pending'</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>address</td>
+          <td>varchar(255)</td>
+          <td>NO</td>
+          <td></td>
+          <td>NULL</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>contact</td>
+          <td>varchar(50)</td>
+          <td>NO</td>
+          <td></td>
+          <td>NULL</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>phone</td>
+          <td>varchar(20)</td>
+          <td>NO</td>
+          <td></td>
+          <td>NULL</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>created_at</td>
+          <td>datetime</td>
+          <td>NO</td>
+          <td></td>
+          <td>CURRENT_TIMESTAMP</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>updated_at</td>
+          <td>datetime</td>
+          <td>NO</td>
+          <td></td>
+          <td>CURRENT_TIMESTAMP</td>
+          <td>on update CURRENT_TIMESTAMP</td>
+        </tr>
+      </table>
+
+      <div class="table-name">order_items</div>
+      <table class="schema-table">
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Null</th>
+          <th>Key</th>
+          <th>Default</th>
+          <th>Extra</th>
+        </tr>
+        <tr>
+          <td>id</td>
+          <td>int</td>
+          <td>NO</td>
+          <td>PRI</td>
+          <td>NULL</td>
+          <td>auto_increment</td>
+        </tr>
+        <tr>
+          <td>order_id</td>
+          <td>int</td>
+          <td>NO</td>
+          <td>MUL</td>
+          <td>NULL</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>product_id</td>
+          <td>int</td>
+          <td>NO</td>
+          <td>MUL</td>
+          <td>NULL</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>quantity</td>
+          <td>int</td>
+          <td>NO</td>
+          <td></td>
+          <td>1</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>price</td>
+          <td>decimal(10,2)</td>
+          <td>NO</td>
+          <td></td>
+          <td>NULL</td>
+          <td></td>
+        </tr>
+      </table>
+
+      <div class="table-name">footprints</div>
+      <table class="schema-table">
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Null</th>
+          <th>Key</th>
+          <th>Default</th>
+          <th>Extra</th>
+        </tr>
+        <tr>
+          <td>id</td>
+          <td>int</td>
+          <td>NO</td>
+          <td>PRI</td>
+          <td>NULL</td>
+          <td>auto_increment</td>
+        </tr>
+        <tr>
+          <td>user_id</td>
+          <td>int</td>
+          <td>NO</td>
+          <td>MUL</td>
+          <td>NULL</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>product_id</td>
+          <td>int</td>
+          <td>NO</td>
+          <td>MUL</td>
+          <td>NULL</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>created_at</td>
+          <td>datetime</td>
+          <td>NO</td>
+          <td></td>
+          <td>CURRENT_TIMESTAMP</td>
+          <td></td>
+        </tr>
+      </table>
+
+      <div class="table-name">favorites</div>
+      <table class="schema-table">
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Null</th>
+          <th>Key</th>
+          <th>Default</th>
+          <th>Extra</th>
+        </tr>
+        <tr>
+          <td>id</td>
+          <td>int</td>
+          <td>NO</td>
+          <td>PRI</td>
+          <td>NULL</td>
+          <td>auto_increment</td>
+        </tr>
+        <tr>
+          <td>user_id</td>
+          <td>int</td>
+          <td>NO</td>
+          <td>MUL</td>
+          <td>NULL</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>product_id</td>
+          <td>int</td>
+          <td>NO</td>
+          <td>MUL</td>
+          <td>NULL</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>created_at</td>
+          <td>datetime</td>
+          <td>NO</td>
+          <td></td>
+          <td>CURRENT_TIMESTAMP</td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

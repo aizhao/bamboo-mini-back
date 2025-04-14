@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bamboo Mini ER Diagram</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f5f5f5;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #333;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .mermaid {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Bamboo Mini ER Diagram</h1>
+      <div class="mermaid">
+        erDiagram USER ||--o{ ORDER : places USER ||--o{ FOOTPRINT : creates
+        USER ||--o{ FAVORITE : has USER { int id PK string openid string
+        nickname string avatar string phone datetime created_at datetime
+        updated_at } ORDER ||--o{ ORDER_ITEM : contains ORDER { int id PK int
+        user_id FK decimal total_amount string status string address string
+        contact string phone datetime created_at datetime updated_at }
+        ORDER_ITEM { int id PK int order_id FK int product_id FK int quantity
+        decimal price } PRODUCT { int id PK string name string description
+        decimal price int stock string image int category_id FK datetime
+        created_at datetime updated_at } CATEGORY { int id PK string name string
+        description } FOOTPRINT { int id PK int user_id FK int product_id FK
+        datetime created_at } FAVORITE { int id PK int user_id FK int product_id
+        FK datetime created_at }
+      </div>
+    </div>
+    <script>
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: "default",
+        securityLevel: "loose",
+      });
+    </script>
+  </body>
+</html>
