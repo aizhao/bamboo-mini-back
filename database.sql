@@ -82,6 +82,19 @@ CREATE TABLE IF NOT EXISTS favorites (
     FOREIGN KEY (product_id) REFERENCES products(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Create dynamic table
+CREATE TABLE IF NOT EXISTS dynamics (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    content TEXT NOT NULL,
+    images JSON,
+    status TINYINT DEFAULT 0 COMMENT '0:待审核 1:已发布 2:已拒绝',
+    review_comment TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 -- Create indexes for better performance
 CREATE INDEX idx_products_category ON products(category_id);
 CREATE INDEX idx_orders_user ON orders(user_id);
