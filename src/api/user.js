@@ -8,7 +8,7 @@ const { verifyToken } = require("../middleware/auth");
 // 用户注册
 router.post("/register", async (req, res) => {
   try {
-    const { username, password, nickname, email } = req.body;
+    const { username, password, nickname, email, openid, phone } = req.body;
 
     // 验证必填字段
     if (!username || !password) {
@@ -37,10 +37,23 @@ router.post("/register", async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
+    // 生成默认的openid（使用时间戳和随机数）
+    const defaultOpenid = `default_${Date.now()}_${Math.random()
+      .toString(36)
+      .substr(2, 9)}`;
+
     // 创建用户
     const [result] = await pool.execute(
-      "INSERT INTO users (username, password, nickname, email, role) VALUES (?, ?, ?, ?, ?)",
-      [username, hashedPassword, nickname || username, email || null, "user"]
+      "INSERT INTO users (username, password, nickname, email, role, openid) VALUES (?, ?, ?, ?, ?, ?)",
+      [
+        username,
+        hashedPassword,
+        nickname || username,
+        email || null,
+        "user",
+        openid || defaultOpenid,
+        phone,
+      ]
     );
 
     res.json({
@@ -116,6 +129,7 @@ router.post("/login", async (req, res) => {
           nickname: user.nickname,
           email: user.email,
           role: user.role,
+          avatar: user.avatar,
         },
       },
     });

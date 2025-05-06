@@ -2,6 +2,23 @@ const express = require("express");
 const router = express.Router();
 const { verifyToken } = require("../middleware/auth");
 const { pool } = require("../db");
+function convertUTCToBeijing(utcString) {
+  const date = new Date(utcString);
+  // 添加8小時的毫秒數
+  const beijingTime = new Date(date.getTime() + 8 * 60 * 60 * 1000);
+
+  // 格式化成北京時間的字符串（YYYY-MM-DD HH:mm:ss）
+  const year = beijingTime.getUTCFullYear();
+  const month = String(beijingTime.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(beijingTime.getUTCDate()).padStart(2, "0");
+  const hours = String(beijingTime.getUTCHours()).padStart(2, "0");
+  const minutes = String(beijingTime.getUTCMinutes()).padStart(2, "0");
+  const seconds = String(beijingTime.getUTCSeconds()).padStart(2, "0");
+
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+
+// 使用示例
 
 // 获取内容列表
 router.get("/list", verifyToken, async (req, res) => {
@@ -68,7 +85,11 @@ router.get("/list", verifyToken, async (req, res) => {
       code: 0,
       message: "获取成功",
       data: {
-        list: rows,
+        list: rows.map((item) => ({
+          ...item,
+          create_time: convertUTCToBeijing(item.create_time),
+          update_time: convertUTCToBeijing(item.update_time),
+        })),
         total: total[0].total,
         page: pageNum,
         pageSize: pageSizeNum,
