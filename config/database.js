@@ -1,10 +1,10 @@
 require("dotenv").config();
 
 module.exports = {
-  host: process.env.DB_HOST || "localhost",
-  username: process.env.DB_USER || "root",
-  password: process.env.DB_PASSWORD || "637616",
-  database: process.env.DB_NAME || "bamboo_mini",
+  host: process.env.DB_HOST || "47.108.223.229",
+  username: process.env.DB_USER || "bamboo-mini",
+  password: process.env.DB_PASSWORD || "XEFfsAxZkk87JE6K",
+  database: process.env.DB_NAME || "bamboo-mini",
   dialect: process.env.DB_DIALECT || "mysql",
   pool: {
     max: 5,
